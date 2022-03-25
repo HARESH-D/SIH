@@ -9,7 +9,7 @@ from keras.models import Sequential
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import MinMaxScaler
 
-df = pd.read_excel('Abhinav.xlsx')
+df = pd.read_excel('Abhinav (1).xlsx')
 print(df.head)
 # df = df.drop(['Date','Hour'], axis=1)
 print(df.shape)
@@ -53,7 +53,7 @@ scaled = scaler.fit_transform(values)
 print(scaled[:, 1])
 print(scaled[:, 0])
 
-n_input = 3
+n_input = 1
 n_features = 7
 
 reframed = series_to_supervised(scaled, n_input, 1)
@@ -102,9 +102,11 @@ model.add(Dense(1))
 
 
 model.compile(loss='mae', optimizer='adam', metrics=[tf.keras.metrics.RootMeanSquaredError()])
-history = model.fit(train_X, train_y, epochs=500, batch_size=72, validation_data=(test_X, test_y), verbose=2,
+history = model.fit(train_X, train_y, epochs=350, batch_size=72, validation_data=(test_X, test_y), verbose=2,
                     shuffle=False)
 
 with open("model_pickle","wb") as f:
     pickle.dump(model, f)
+
+
 
